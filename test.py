@@ -14,7 +14,7 @@ predict = "G3"
 x = np.array(data.drop([predict], 1))
 y = np.array(data[predict])
 
-# create test data
+# create test and train data
 x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(x, y, test_size=0.1)
 
 # create model and determine accuracy
@@ -27,6 +27,7 @@ print(acc)
 print("Coefficient: ", linear.coef_)
 print("Intercept: ", linear.intercept_)
 
+# predict scores against test data
 predictions = linear.predict(x_test)
 
 for x in range(len(predictions)):
