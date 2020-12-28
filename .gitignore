@@ -1,2 +1,5 @@
 # dependencies
 .idea/
+
+# generated model
+*.pickle
