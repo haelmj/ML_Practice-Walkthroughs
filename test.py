@@ -18,21 +18,28 @@ y = np.array(data[predict])
 x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(x, y, test_size=0.1)
 # create test and train data
 
-best = 0
-for _ in range(50):
-    x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(x, y, test_size=0.1)
 
-    # create model and determine accuracy
-    linear = linear_model.LinearRegression()
+def model_percentage():
+    """ Save highest accurate model"""
+    best = 0
+    for _ in range(50):
+        x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(x, y, test_size=0.1)
 
-    linear.fit(x_train, y_train)
-    acc = linear.score(x_test, y_test)
-    print(acc)
+        # create model and determine accuracy
+        linear = linear_model.LinearRegression()
 
-    if acc > best:
-        best = acc
-        with open('studentmodel.pickle', 'wb') as f:
-            pickle.dump(linear, f)
+        linear.fit(x_train, y_train)
+        acc = linear.score(x_test, y_test)
+        print(acc)
+
+        if acc > best:
+            best = acc
+            with open('studentmodel.pickle', 'wb') as f:
+                pickle.dump(linear, f)
+
+
+# run once; comment out subsequently
+model_percentage()
 
 with open('studentmodel.pickle', 'rb') as pickle_in:
     linear = pickle.load(pickle_in)
